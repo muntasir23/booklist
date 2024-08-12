@@ -1,4 +1,4 @@
-import { ADDED, DELETED, EDITED, TOGGLED } from "./actionType";
+import { ADDED, DELETED, EDITED, LOADED, TOGGLED } from "./actionType";
 import { initailState } from "./initialState";
 
 const nextId = (books) => {
@@ -8,6 +8,9 @@ const nextId = (books) => {
 
 const bookReducer = (state = initailState, action) => {
   switch (action.type) {
+    case LOADED:
+      return action.payload;
+
     case ADDED:
       return [
         ...state,

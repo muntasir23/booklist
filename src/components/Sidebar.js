@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import addBooks from "../redux/addbooks/thunk/addBooks";
+import updateBooks from "../redux/addbooks/thunk/updateBook";
 
-import { added, edited } from "../redux/addbooks/action";
-
-export default function Sidebar({ editMode, bookToEdit, setBookToEdit }) {
+export default function Sidebar({ editMode, bookToEdit , removeMode}) {
   const [bookData, setBookData] = useState([
     {
       bookName: "",
@@ -41,12 +41,12 @@ export default function Sidebar({ editMode, bookToEdit, setBookToEdit }) {
       rating: "",
       featured: false,
     });
-    dispatch(added(bookData));
+    dispatch(addBooks(bookData));
   };
 
   const handleEdit = (e) => {
     e.preventDefault();
-    dispatch(edited(bookData));
+    dispatch(updateBooks(bookData));
     setBookData({
       bookName: "",
       author: "",
@@ -55,6 +55,7 @@ export default function Sidebar({ editMode, bookToEdit, setBookToEdit }) {
       rating: "",
       featured: false,
     });
+    removeMode()
   };
 
   return (

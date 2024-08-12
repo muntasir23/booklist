@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleted } from "../redux/addbooks/action";
 import Rating from "./Rating";
+import deleteBook from "../redux/addbooks/thunk/deleteBook";
 
 export default function BookCard({ book, addEditMode }) {
   const { id, bookName, author, imgUrl, price, rating, featured } = book;
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleted(id));
+    dispatch(deleteBook(id));
   };
 
   const handleEdit = () => {
@@ -24,7 +24,9 @@ export default function BookCard({ book, addEditMode }) {
       />
       <div className="flex-1 h-full pr-2 pt-2 flex flex-col">
         <div className="flex items-center justify-between">
-          {featured && <span className="badge-success lws-Badge">featured</span>}
+          {featured && (
+            <span className="badge-success lws-Badge">featured</span>
+          )}
 
           <div className="text-gray-500 space-x-2">
             <button onClick={handleEdit} className="lws-edit">
@@ -63,8 +65,8 @@ export default function BookCard({ book, addEditMode }) {
         <div className="space-y-2 mt-4 h-full">
           <h4 className="lws-bookName">{bookName}</h4>
           <p className="lws-author">{author}</p>
-          <div className="lws-stars"> 
-            <Rating  rating={rating} />
+          <div className="lws-stars">
+            <Rating rating={rating} />
           </div>
           <p className="lws-price">BDT {price}</p>
         </div>

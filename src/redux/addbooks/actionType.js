@@ -1,3 +1,4 @@
+export const LOADED = "addbooks/loaded"
 export const ADDED = "addbooks/added";
 export const DELETED = "addbooks/deleted";
 export const EDITED = "addbooks/edited";

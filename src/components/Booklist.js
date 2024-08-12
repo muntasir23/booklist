@@ -1,12 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import BookCard from "./BookCard";
 import Feature from "./Feature";
+import fetchBooks from "../redux/addbooks/thunk/fetchBooks";
 
-export default function Booklist({addEditMode}) {
+export default function Booklist({ addEditMode }) {
   const books = useSelector((state) => state.books);
   const filters = useSelector((state) => state.filters);
   const { searchText } = filters;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBooks);
+  }, [dispatch]);
 
   return (
     <div className="order-2 xl:-order-1">
@@ -36,7 +43,7 @@ export default function Booklist({addEditMode}) {
               : book.bookName.toLowerCase().includes(searchText);
           })
           .map((book) => (
-            <BookCard book={book} addEditMode={addEditMode} />
+            <BookCard key={book.id} book={book} addEditMode={addEditMode} />
           ))}
       </div>
     </div>
